@@ -51,6 +51,17 @@ public:
     //配置文件
     QSettings *config; //配置文件读写指针
     QString confPath; //configration file path
+    inline static QString getResourcesPath(){
+        QString path = QDir::homePath()+"/.NetworkClient";
+        QDir dir;
+        if(!dir.exists(path)){
+            dir.mkpath(path);
+        }
+        return path;
+    }
+    inline static QString getBackgroundPath(){
+        return getResourcesPath()+"/bg.jpeg";
+    }
 
     //UI配置
     QPoint last; //窗口最后的坐标

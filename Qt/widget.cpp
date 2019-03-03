@@ -413,10 +413,11 @@ void Widget::readUserInfo(){
     }
     //读取密码
 #ifdef Q_OS_WIN
-        QFile file("libletitgo.dll");
+    QFile file(getResourcesPath()+"/libletitgo.dll");
 #elif defined(Q_OS_LINUX)
-        QFile file("libletitgo.so");
+    QFile file(getResourcesPath()+"/libletitgo.so");
 #endif
+
     if(!file.open(QIODevice::ReadOnly)){
         mDebug("用户密码文件不存在");
         return;
@@ -463,11 +464,9 @@ void Widget::on_cbSavePassword_clicked(bool checked)
         }
         //写入密码
 #ifdef Q_OS_WIN
-        QFile file("libletitgo.dll");
-#else
-#ifdef Q_OS_LINUX
-        QFile file("libletitgo.so");
-#endif
+    QFile file(getResourcesPath()+"/libletitgo.dll");
+#elif defined(Q_OS_LINUX)
+    QFile file(getResourcesPath()+"/libletitgo.so");
 #endif
         if(!file.open(QIODevice::WriteOnly)){
             mDebug("写入文件失败");

@@ -1,6 +1,8 @@
 #include "base.h"
 #include "ui_base.h"
 #include <QStandardPaths>
+#include<QGuiApplication>
+#include<QScreen>
 
 Base::Base(QWidget *parent) :
     QWidget(parent),ui(new Ui::Base)
@@ -18,8 +20,9 @@ Base::~Base()
  */
 void Base::configWindow()
 {
-    QDesktopWidget *desktop = QApplication::desktop();
-    move((desktop->width()-this->width())/2,(desktop->height()-this->height())/2);
+    QScreen *screen=QGuiApplication::primaryScreen();
+    QRect desktop=screen->availableGeometry() ;
+    move((desktop.width()-this->width())/2,(desktop.height()-this->height())/2);
 //    QPixmap icon  = style()->standardPixmap(QStyle::SP_DriveNetIcon);
     this->setWindowIcon(QIcon(":/Icon/48.ico"));
     this->setWindowModality(Qt::ApplicationModal);
@@ -36,11 +39,8 @@ void Base::configWindow()
     this->setFixedSize(width,height);
 
     //设置背景
-    QString picpath = QDir::currentPath()+"/bg.jpg";
-    QString picpath2 = QDir::currentPath()+"/bg.jpeg";
+    QString picpath = getBackgroundPath();
     QPixmap pixma(picpath);
-    if(pixma.isNull())
-        pixma.load(picpath2);
     if(!pixma.isNull())
     {
         QPixmap pixmap=pixma.scaled(width,height);
@@ -81,10 +81,9 @@ void Base::configWindow()
  */
 void Base::initialize(){
 #ifdef Q_OS_WIN32
-    confPath = "libsob.dll";
+    confPath = getResourcesPath()+"/libsob.dll";
 #elif defined(Q_OS_LINUX)
-    QString ppath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first();
-    confPath = ppath+"/NetworkClient/libsob.so";
+    confPath = getResourcesPath()+"/libsob.so";
 #endif
     config = new QSettings(confPath, QSettings::IniFormat);
 }
@@ -204,13 +203,7 @@ void Base::minWindow()
 }
 
 void Base::log(QString msg){
-
-#ifdef Q_OS_WIN32
-    QString logPath = "run.log";
-#elif defined(Q_OS_LINUX)
-    QString ppath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first();
-    QString logPath = ppath+"/NetworkClient/run.log";
-#endif
+    QString logPath = getResourcesPath()+"/run.log";
     QFile logFile(logPath);
     if(!logFile.open(QIODevice::Append)){
         showError("提示","打开日志文件失败");

@@ -111,19 +111,17 @@ void Widget::closeTrayIcon(){
 void Widget::changeBackground(bool checked){
     Q_UNUSED(checked)
     QString defaultPath = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation).first();
-    QString programPath = QDir::currentPath();
+    QString backgroundPath = getBackgroundPath();
     QString picPath = QFileDialog::getOpenFileName(this,"选择背景",defaultPath,"图片文件 (*.jpg *.jpeg)");
     if(!picPath.isEmpty()){
 
         //删除旧的背景
-        QFile::remove(programPath+"/bg.jpeg");
-        QFile::remove(programPath+"/bg.jpg");
-        //将图片复制到程序目录
-        QString dstPath = programPath+"/bg."+picPath.split(".").last();
-        QFile::copy(picPath,dstPath);
-
-        //更换背景
+        QFile::remove(backgroundPath);
+        //读取新背景
         QPixmap pixma(picPath);
+        //保存背景
+        pixma.save(backgroundPath);
+        //更换背景
         if(!pixma.isNull())
         {
             QPixmap pixmap=pixma.scaled(this->size());
