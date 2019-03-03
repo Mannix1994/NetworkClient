@@ -1,0 +1,7 @@
+# 打开Qt 5.11.3 for Desktop (MinGW 5.3.0 32 bit)，输入命令：
+# 切换目录
+pushd E:\wangmz\Projects\Qt\NetworkClient\build\win
+# 使用windeployqt找出依赖文件
+D:\Qt\Qt511\5.11.3\mingw53_32\bin\windeployqt.exe NetworkClient.exe
+
+# 安装Inno Setup，然后打开NetworkClient.iss

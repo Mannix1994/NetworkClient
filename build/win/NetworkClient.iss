@@ -23,22 +23,22 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 ;DisableDirPage=yes
 DisableProgramGroupPage=yes
-LicenseFile=D:\DE\Qt\NetworkClient.executable\license.txt
-OutputDir=D:\DE\Qt\
+LicenseFile=E:\wangmz\Projects\Qt\NetworkClient\build\license.txt
+OutputDir=E:\wangmz\Projects\Qt\NetworkClient\bin
 OutputBaseFilename=NetworkClient
-SetupIconFile=D:\DE\Qt\NetworkClient\Icons\64X64.ico
+SetupIconFile=E:\wangmz\Projects\Qt\NetworkClient\Qt\Icons\64X64.ico
 Compression=lzma
 SolidCompression=yes
 
-[Languages]
-Name: "Chinese"; MessagesFile: "compiler:Languages\Chinese.islu"
+;[Languages]
+;Name: "Chinese"; MessagesFile: "compiler:Languages\Chinese.islu"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
 
 [Files]
-Source: "D:\DE\Qt\NetworkClient.executable\NetworkClient.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\DE\Qt\NetworkClient.executable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\wangmz\Projects\Qt\NetworkClient\build\win\NetworkClient.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\wangmz\Projects\Qt\NetworkClient\build\win\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
