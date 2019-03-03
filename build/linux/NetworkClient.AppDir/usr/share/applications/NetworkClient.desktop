@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=NetworkClient
+Comment=四川大学无线网络客户端
+Exec=NetworkClient
+Icon=NetworkClient
+Categories=Office;
+Name[en_US]=NetworkClient.desktop

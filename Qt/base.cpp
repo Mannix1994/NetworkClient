@@ -1,5 +1,6 @@
 #include "base.h"
 #include "ui_base.h"
+#include <QStandardPaths>
 
 Base::Base(QWidget *parent) :
     QWidget(parent),ui(new Ui::Base)
@@ -22,7 +23,7 @@ void Base::configWindow()
 //    QPixmap icon  = style()->standardPixmap(QStyle::SP_DriveNetIcon);
     this->setWindowIcon(QIcon(":/Icon/48.ico"));
     this->setWindowModality(Qt::ApplicationModal);
-    this->setWindowTitle("网络共享");
+    this->setWindowTitle("请自定义窗口标题");
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->setFixedSize(this->size());
 
@@ -208,7 +209,7 @@ void Base::log(QString msg){
     QString logPath = "run.log";
 #elif defined(Q_OS_LINUX)
     QString ppath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first();
-    logPath = ppath+"/NetworkClient/run.log";
+    QString logPath = ppath+"/NetworkClient/run.log";
 #endif
     QFile logFile(logPath);
     if(!logFile.open(QIODevice::Append)){

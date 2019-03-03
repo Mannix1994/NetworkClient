@@ -1,0 +1,1 @@
+./linuxdeployqt NetworkClient.AppDir/usr/share/applications/NetworkClient.desktop -appimage

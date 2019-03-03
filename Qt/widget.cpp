@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "filedownloader.h"
+#include <QIntValidator>
 
 //#include "trayIcon.cpp" 其他函数包含在trayIcon.cpp中
 
@@ -413,7 +414,7 @@ void Widget::readUserInfo(){
     //读取密码
 #ifdef Q_OS_WIN
         QFile file("libletitgo.dll");
-#elif define(Q_OS_LINUX)
+#elif defined(Q_OS_LINUX)
         QFile file("libletitgo.so");
 #endif
     if(!file.open(QIODevice::ReadOnly)){
@@ -463,8 +464,10 @@ void Widget::on_cbSavePassword_clicked(bool checked)
         //写入密码
 #ifdef Q_OS_WIN
         QFile file("libletitgo.dll");
-#elif define(Q_OS_LINUX)
+#else
+#ifdef Q_OS_LINUX
         QFile file("libletitgo.so");
+#endif
 #endif
         if(!file.open(QIODevice::WriteOnly)){
             mDebug("写入文件失败");

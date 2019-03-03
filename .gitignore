@@ -1,0 +1,9 @@
+Android/*.iml
+Android/.gradle
+Android/local.properties
+Android/.idea
+Android/.DS_Store
+Android/build
+Android/captures
+Android/.externalNativeBuild
+build-NetworkClient*
