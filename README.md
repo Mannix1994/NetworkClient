@@ -21,8 +21,10 @@
     ./NetworkClient-x86_64.AppImage
 	# 也可双击运行
 	```
-* Android
-    点击[下载](https://github.com/Mannix1994/NetworkClient/releases/download/V1.0/app-release.apk)下载软件，安装即可运行。
+* Android  
+    * 点击[下载](https://github.com/Mannix1994/NetworkClient/releases/download/V1.0/app-release.apk)
+    下载软件，或者复制链接[https://github.com/Mannix1994/NetworkClient/releases/download/V1.0/app-release.apk](https://github.com/Mannix1994/NetworkClient/releases/download/V1.0/app-release.apk)
+    发送到手机，使用手机下载安装。
 
 ## 三、使用指南
   
