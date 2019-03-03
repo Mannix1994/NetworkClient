@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">校园网</string>
+    <string name="login">登录</string>
+    <string name="logout">注销</string>
+    <string name="changeBackground">更换背景</string>
+    <string name="autoLogin">自动登录</string>
+    <string name="userInfo">用户信息</string>
+    <string name="title_activity_crop">CropActivity</string>
+    <string name="userId">账号</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="savePassword">保存密码？</string>
+    <string name="choose_service">选择服务</string>
+    <string name="internet">校园网</string>
+    <string name="china_mobile">中国移动</string>
+    <string name="china_unicom">中国联通</string>
+    <string name="mobile_account">移动账号</string>
+    <string name="unicom_account">联通账号</string>
+    <string name="mobile_output">移动出口</string>
+    <string name="unicom_output">联通出口</string>
+</resources>

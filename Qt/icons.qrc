@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/48px">
+        <file>Icons/48X48.ico</file>
+        <file>Icons/information_48px.ico</file>
+        <file>Icons/picture_48px.ico</file>
+        <file>Icons/logout_48X48.ico</file>
+        <file>Icons/service_48.ico</file>
+    </qresource>
+    <qresource prefix="/64px">
+        <file>Icons/64X64.ico</file>
+        <file>Icons/information_64px.ico</file>
+        <file>Icons/picture_64px.ico</file>
+        <file>Icons/logout_64X64.ico</file>
+        <file>Icons/service_64.ico</file>
+    </qresource>
+    <qresource prefix="/128px">
+        <file>Icons/128X128.ico</file>
+        <file>Icons/information_128px.ico</file>
+        <file>Icons/picture_128px.ico</file>
+        <file>Icons/logout_128X128.ico</file>
+        <file>Icons/service_128.ico</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/userinfo" android:title="@string/userInfo"></item>
+    <item android:id="@+id/autologin" android:title="@string/autoLogin"></item>
+    <item android:id="@+id/menuChangeBackground" android:title="更换背景"></item>
+</menu>
