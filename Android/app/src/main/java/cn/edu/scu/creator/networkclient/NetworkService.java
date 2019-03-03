@@ -415,7 +415,6 @@ public final class NetworkService {
      */
     private String sendGetRequest(String url)
     {
-        PrintWriter out = null;
         BufferedReader in = null;
         String result = "";
         try {
@@ -442,9 +441,6 @@ public final class NetworkService {
         // 使用finally块来关闭输出流、输入流
         finally {
             try {
-                if (out != null) {
-                    out.close();
-                }
                 if (in != null) {
                     in.close();
                 }

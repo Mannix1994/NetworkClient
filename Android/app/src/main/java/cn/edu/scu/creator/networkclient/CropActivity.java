@@ -50,7 +50,7 @@ public class CropActivity extends AppCompatActivity {
 
     /**
      * 初始按钮和mCropView组件
-     * @param savedInstanceState
+     * @param savedInstanceState 不知道是啥用
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

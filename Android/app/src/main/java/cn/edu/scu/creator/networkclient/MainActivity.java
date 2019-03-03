@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -27,22 +26,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -130,32 +122,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //设置监听器
-        etUserId.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
-                config = sp.edit();
-                config.putString("userId",s.toString());
-                config.apply();
-            }
-        });
-        etPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(cbSavePassword.isChecked()) {
-                    config = sp.edit();
-                    config.putString("password", s.toString());
-                    config.apply();
-                }
-            }
-        });
+        etUserId.addTextChangedListener(new EditTextWatcher(etUserId));
+        etPassword.addTextChangedListener(new EditTextWatcher(etPassword));
         cbSavePassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -257,6 +225,40 @@ public class MainActivity extends AppCompatActivity {
                 if(!networkService.logout(userIndex))
                     processErrorMessage();
                 setEnabled(false);
+            }
+        }
+    }
+
+    /**
+     * 监听编辑框项
+     */
+    private class EditTextWatcher implements TextWatcher {
+
+        private int viewId;
+        EditTextWatcher(View view){
+            this.viewId = view.getId();
+        }
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (viewId){
+                case R.id.etUserId:
+                    config = sp.edit();
+                    config.putString("userId",s.toString());
+                    config.apply();
+                    break;
+                case R.id.etPassword:
+                    if(cbSavePassword.isChecked()) {
+                        config = sp.edit();
+                        config.putString("password", s.toString());
+                        config.apply();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -372,6 +374,7 @@ public class MainActivity extends AppCompatActivity {
                 btLogin.setEnabled(true);
                 btLogin.setText(R.string.logout);
                 btLogin.setBackgroundColor(Color.TRANSPARENT);
+                showMessage(STRINGS.SUCCESS_TO_LOGIN);
             }
             else{
                 if(message.contains("您未绑定服务对应的运营商!")){
@@ -411,6 +414,7 @@ public class MainActivity extends AppCompatActivity {
                 setEnabled(true);
                 btLogin.setText(R.string.login);
                 btLogin.setBackgroundColor(buttonColor);
+                showMessage(STRINGS.SUCCESS_TO_LOGOUT);
             }else{
                 setEnabled(true);
                 showMessage(message);
@@ -456,7 +460,6 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     }).setNegativeButton("取消", null).create();
                             dialog.show();
-                            return;
                         }else{
                             etUserId.setEnabled(false);
                             etPassword.setEnabled(false);
@@ -535,16 +538,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private void readUserInfo(Context context)
     {
-//        SharedPreferences sp = context.getSharedPreferences("config",Context.MODE_PRIVATE);
-        String userId = sp.getString("userId","");
+        SharedPreferences spp = context.getSharedPreferences("config",Context.MODE_PRIVATE);
+        String userId = spp.getString("userId","");
         etUserId.setText(userId);
-        etPassword.setText(sp.getString("password",""));
-        cbSavePassword.setChecked(sp.getBoolean("savePassword",false));
+        etPassword.setText(spp.getString("password",""));
+        cbSavePassword.setChecked(spp.getBoolean("savePassword",false));
         if(!userId.isEmpty())
             etPassword.requestFocus();
         etPassword.setSelection(etPassword.getText().length());
         //读取背景路径，并设置背景
-        String backgroundPath = sp.getString("backgroundPath","");
+        String backgroundPath = spp.getString("backgroundPath","");
         if(!backgroundPath.isEmpty()){
             File file = new File(backgroundPath);
             if(file.exists()) {
@@ -553,9 +556,9 @@ public class MainActivity extends AppCompatActivity {
                 this.setDefaultBackground();
             }
         }
-        service = sp.getString("service","internet");
-        operatorUserId = sp.getString("operatorUserId","");
-        operatorPwd = sp.getString("operatorPwd","");
+        service = spp.getString("service","internet");
+        operatorUserId = spp.getString("operatorUserId","");
+        operatorPwd = spp.getString("operatorPwd","");
     }
 
     /**
@@ -847,7 +850,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void cropPicture(String path){
         try {
-            File srcPic = new File(path);
             String toPath = Environment.getExternalStorageDirectory().getPath() + "/NetworkClient";
             File destDir = new File(toPath);
             if (!destDir.exists()) {

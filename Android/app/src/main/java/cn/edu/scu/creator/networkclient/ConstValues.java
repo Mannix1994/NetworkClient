@@ -37,6 +37,8 @@ class ConstValues {
         public final static  String StrLogout = "注销";
         public final static String USER_ID_IS_EMPTY = "用户名为空";
         public final static String PASSWORD_IS_EMPTY = "密码为空";
+        public final static String SUCCESS_TO_LOGIN = "登录成功";
+        public final static String SUCCESS_TO_LOGOUT = "注销成功";
 
         //NetworkService中使用
         public final static String FAIL_TO_CONNECT_SERVER = "连接服务器失败";
